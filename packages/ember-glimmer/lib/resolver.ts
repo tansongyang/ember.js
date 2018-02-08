@@ -4,13 +4,12 @@ import {
   Option,
   RuntimeResolver as IRuntimeResolver
 } from '@glimmer/interfaces';
-import { LazyOpcodeBuilder, Macros, OpcodeBuilderConstructor, TemplateOptions } from '@glimmer/opcode-compiler';
+import { LazyOpcodeBuilder, Macros, OpcodeBuilderConstructor, PartialDefinition, TemplateOptions } from '@glimmer/opcode-compiler';
 import { LazyConstants, Program } from '@glimmer/program';
 import {
   getDynamicVar,
   Helper,
   ModifierManager,
-  PartialDefinition,
 } from '@glimmer/runtime';
 import { privatize as P } from 'container';
 import { assert } from 'ember-debug';
