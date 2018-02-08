@@ -8,6 +8,7 @@ import {
   IteratorResult,
   RenderResult,
   UNDEFINED_REFERENCE,
+  renderMain,
 } from '@glimmer/runtime';
 import { Opaque } from '@glimmer/util';
 import { assert } from 'ember-debug';
@@ -93,14 +94,16 @@ class RootState {
     };
 
     this.render = () => {
-      let iterator = template.renderLayout({
-        self,
+      let layout = template.asLayout();
+      let handle = layout.compile();
+      let iterator = renderMain(layout['options'].program,
         env,
-        builder: clientBuilder(env, { element: parentElement, nextSibling: null}),
-        dynamicScope
-      });
+        self,
+        dynamicScope,
+        clientBuilder(env, { element: parentElement, nextSibling: null}),
+        handle
+      );
       let iteratorResult: IteratorResult<RenderResult>;
-
       do {
         iteratorResult = iterator.next();
       } while (!iteratorResult.done);
